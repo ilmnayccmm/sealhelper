@@ -1,13 +1,1038 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="uk">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-<link   rel="stylesheet" href="main.css">        <title>Document</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Seal Helper - захист і підтримка тюленів">
+    <title>Seal Helper - Adopt, Donate, Support Seals</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        /* Header */
+        .header {
+            background: #2B5F6F;
+            padding: 20px 0;
+            position: relative;
+        }
+
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 40px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: white;
+            padding: 10px 20px;
+            border-radius: 50px;
+        }
+
+        .logo img {
+            width: 60px;
+            height: 60px;
+        }
+
+        .logo-text {
+            font-size: 14px;
+            font-weight: bold;
+            color: #2B5F6F;
+            line-height: 1.2;
+        }
+
+        .nav {
+            display: flex;
+            gap: 30px;
+            align-items: center;
+        }
+
+        .nav a {
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+            text-transform: uppercase;
+            font-weight: 500;
+            transition: opacity 0.3s;
+        }
+
+        .nav a:hover {
+            opacity: 0.8;
+        }
+
+        .header-icons {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .header-icons button {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+        /* Adopt Sidebar */
+        .adopt-sidebar {
+            position: fixed;
+            right: 0;
+            top: 140px;
+            background: #7B7BA8;
+            color: white;
+            padding: 30px 20px;
+            text-align: center;
+            z-index: 100;
+            border-radius: 20px 0 0 20px;
+            box-shadow: -5px 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .adopt-sidebar h3 {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        .adopt-icon {
+            width: 60px;
+            height: 60px;
+            margin: 10px auto;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(to bottom, #E8F4F8 0%, #D4E9F0 100%);
+            padding: 60px 40px;
+            position: relative;
+            border-bottom: 40px solid transparent;
+            border-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 60"><path d="M0,30 Q50,0 100,30 T200,30 T300,30 T400,30 T500,30 T600,30 T700,30 T800,30 T900,30 T1000,30 T1100,30 T1200,30 L1200,60 L0,60 Z" fill="%232B5F6F"/></svg>') 40 stretch;
+        }
+
+        .hero-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 40px;
+            align-items: start;
+        }
+
+        /* Birthday Card */
+        .birthday-card {
+            background: white;
+            padding: 20px;
+            border-radius: 20px;
+            border: 3px dashed #A8D5E2;
+            position: relative;
+        }
+
+        .birthday-card::before {
+            content: '';
+            position: absolute;
+            top: -20px;
+            left: 20px;
+            width: 40px;
+            height: 40px;
+            background: #5B9EB5;
+            clip-path: polygon(0 0, 50% 40%, 100% 0, 100% 100%, 0 100%);
+        }
+
+        .seal-photo {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            border: 8px solid #A8D5E2;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><circle cx="100" cy="100" r="90" fill="%23A8D5E2"/></svg>');
+            margin: 20px auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 60px;
+        }
+
+        .birthday-text {
+            text-align: center;
+            color: #2B5F6F;
+            line-height: 1.6;
+        }
+
+        .birthday-text h3 {
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+
+        .birthday-link {
+            color: #5B9EB5;
+            text-decoration: underline;
+        }
+
+        /* Letter Card */
+        .letter-card {
+            background: #F5EFE0;
+            padding: 30px;
+            border-radius: 0;
+            position: relative;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+            transform: rotate(-2deg);
+        }
+
+        .letter-card::after {
+            content: '';
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: 0;
+            height: 0;
+            border-style: solid;
+            border-width: 0 30px 30px 0;
+            border-color: transparent #F5EFE0 transparent transparent;
+        }
+
+        .polaroid {
+            background: white;
+            padding: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            margin: 15px auto;
+            width: fit-content;
+            transform: rotate(3deg);
+        }
+
+        .polaroid img {
+            width: 180px;
+            height: 150px;
+            display: block;
+        }
+
+        .letter-text {
+            text-align: center;
+            font-size: 18px;
+            line-height: 1.6;
+            color: #333;
+            font-style: italic;
+        }
+
+        /* Report Badge */
+        .report-badge {
+            position: absolute;
+            right: 40px;
+            top: 200px;
+            width: 150px;
+            height: 150px;
+            background: #FFE066;
+            clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 8px 15px rgba(0,0,0,0.3);
+            transform: rotate(15deg);
+            border: 4px solid #333;
+        }
+
+        .report-text {
+            text-align: center;
+            font-weight: bold;
+            color: #D32F2F;
+            font-size: 16px;
+            line-height: 1.2;
+            transform: rotate(-15deg);
+        }
+
+        /* Phone Decoration */
+        .phone-decor {
+            position: absolute;
+            right: 180px;
+            top: 150px;
+            font-size: 60px;
+            transform: rotate(-20deg);
+        }
+
+        /* Mission Text */
+        .mission-text {
+            background: #5B9EB5;
+            color: white;
+            padding: 40px;
+            text-align: center;
+            font-size: 16px;
+            line-height: 1.8;
+            margin-top: -40px;
+        }
+
+        /* Seal Border */
+        .seal-border {
+            height: 40px;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 40"><ellipse cx="30" cy="20" rx="20" ry="15" fill="%23A8D5E2"/><ellipse cx="90" cy="20" rx="20" ry="15" fill="%23A8D5E2"/><ellipse cx="150" cy="20" rx="20" ry="15" fill="%23A8D5E2"/></svg>');
+            background-repeat: repeat-x;
+        }
+
+        /* Meet Seals */
+        .meet-seals {
+            background: white;
+            padding: 80px 40px;
+            text-align: center;
+        }
+
+        .meet-seals h2 {
+            font-size: 42px;
+            color: #5B9EB5;
+            margin-bottom: 60px;
+            text-transform: uppercase;
+        }
+
+        .seals-grid {
+            display: flex;
+            justify-content: center;
+            gap: 60px;
+            max-width: 1200px;
+            margin: 0 auto;
+            align-items: flex-end;
+        }
+
+        .seal-card {
+            position: relative;
+        }
+
+        .seal-frame {
+            width: 250px;
+            height: 250px;
+            border: 5px dashed #A8D5E2;
+            border-radius: 50% 50% 48% 52% / 52% 48% 52% 48%;
+            padding: 20px;
+            background: #E8F4F8;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .seal-card.center .seal-frame {
+            width: 400px;
+            height: 400px;
+            background: linear-gradient(135deg, #E8F4F8, #D4E9F0);
+        }
+
+        .seal-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+
+        .seal-name {
+            font-size: 42px;
+            font-weight: bold;
+            color: #5B9EB5;
+            margin-top: 20px;
+            text-transform: uppercase;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .seal-card.center .seal-name {
+            font-size: 56px;
+        }
+
+        /* Heart decoration */
+        .heart-decoration {
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #FF6B9D, #C44569);
+            border: 4px solid #fff;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+
+        .seal-card.center .heart-decoration {
+            clip-path: polygon(50% 100%, 0% 50%, 25% 0%, 50% 15%, 75% 0%, 100% 50%);
+        }
+
+        /* What We Do */
+        .what-we-do {
+            padding: 80px 40px;
+            background: white;
+            position: relative;
+        }
+
+        .what-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .video-container {
+            position: relative;
+            background: #5B9EB5;
+            padding: 20px;
+            border-radius: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .video-placeholder {
+            width: 100%;
+            height: 400px;
+            background: #2B5F6F;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 80px;
+            color: white;
+        }
+
+        .cloud-shape {
+            background: #A8D5E2;
+            padding: 40px;
+            border-radius: 50% 50% 50% 0%;
+            position: relative;
+        }
+
+        .what-text h2 {
+            font-size: 48px;
+            color: #5B9EB5;
+            margin-bottom: 20px;
+        }
+
+        .what-text p {
+            font-size: 18px;
+            line-height: 1.8;
+            color: #2B5F6F;
+        }
+
+        /* What To Do Section */
+        .what-to-do {
+            background: linear-gradient(to bottom, white, #E8F4F8);
+            padding: 80px 40px;
+            position: relative;
+        }
+
+        .what-to-do h2 {
+            font-size: 48px;
+            color: #5B9EB5;
+            text-align: left;
+            margin-bottom: 60px;
+            text-transform: uppercase;
+        }
+
+        .seal-illustration {
+            position: absolute;
+            right: 100px;
+            top: 50px;
+            width: 300px;
+        }
+
+        .info-cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+            max-width: 1200px;
+        }
+
+        .info-card {
+            background: #A8D5E2;
+            padding: 40px 30px;
+            border-radius: 30px;
+            text-align: center;
+            color: white;
+            position: relative;
+        }
+
+        .info-card h3 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+        }
+
+        .info-card p {
+            font-size: 16px;
+            line-height: 1.6;
+        }
+
+        .info-icon {
+            font-size: 60px;
+            margin-bottom: 20px;
+        }
+
+        /* Impact Numbers */
+        .impact {
+            background: linear-gradient(to bottom, #E8F4F8, white);
+            padding: 80px 40px;
+        }
+
+        .impact h2 {
+            font-size: 48px;
+            color: #5B9EB5;
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 30px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 56px;
+            font-weight: bold;
+            color: #5B9EB5;
+            margin-bottom: 10px;
+        }
+
+        .stat-label {
+            font-size: 16px;
+            color: #2B5F6F;
+            line-height: 1.4;
+        }
+
+        /* Education Section */
+        .education {
+            background: white;
+            padding: 80px 40px;
+            position: relative;
+        }
+
+        .education-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+        }
+
+        .polaroid-stack {
+            position: relative;
+        }
+
+        .polaroid-item {
+            background: white;
+            padding: 15px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+            position: absolute;
+        }
+
+        .polaroid-item:first-child {
+            transform: rotate(-8deg);
+            left: 0;
+            top: 0;
+        }
+
+        .polaroid-item:last-child {
+            transform: rotate(5deg);
+            left: 100px;
+            top: 150px;
+        }
+
+        .polaroid-item img {
+            width: 300px;
+            height: 250px;
+            display: block;
+        }
+
+        .education-text {
+            background: #D4E9F0;
+            padding: 60px 40px;
+            border-radius: 50% 50% 0% 50%;
+        }
+
+        .education-text h2 {
+            font-size: 48px;
+            color: #5B9EB5;
+            margin-bottom: 30px;
+        }
+
+        .education-text p {
+            font-size: 18px;
+            line-height: 1.8;
+            color: #2B5F6F;
+            margin-bottom: 20px;
+        }
+
+        .read-more {
+            color: #5B9EB5;
+            text-decoration: underline;
+            font-weight: bold;
+        }
+
+        /* Join Team */
+        .join-team {
+            background: linear-gradient(to right, white 60%, #A8D5E2 60%);
+            padding: 80px 40px;
+            position: relative;
+        }
+
+        .join-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .join-content h2 {
+            font-size: 42px;
+            color: #2B5F6F;
+            margin-bottom: 10px;
+        }
+
+        .join-content p {
+            font-size: 24px;
+            color: #2B5F6F;
+            margin-bottom: 40px;
+        }
+
+        .arrow-decoration {
+            font-size: 80px;
+            color: #D32F2F;
+            position: absolute;
+            right: 300px;
+            top: 50%;
+        }
+
+        .star-burst {
+            position: absolute;
+            right: 100px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 200px;
+            height: 200px;
+            background: #5B9EB5;
+            clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 60px;
+        }
+
+        .decorative-stars {
+            position: absolute;
+            left: 100px;
+            bottom: 100px;
+        }
+
+        .star {
+            display: inline-block;
+            font-size: 40px;
+            margin: 0 10px;
+        }
+
+        /* Footer */
+        .footer {
+            background: #A8D5E2;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .social-icon {
+            width: 50px;
+            height: 50px;
+            background: white;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .social-icon:hover {
+            transform: scale(1.1);
+        }
+
+        /* Wave decoration */
+        .wave-bottom {
+            height: 60px;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 60"><path d="M0,30 Q100,0 200,30 T400,30 T600,30 T800,30 T1000,30 T1200,30 L1200,60 L0,60 Z" fill="white"/></svg>');
+            background-size: cover;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .hero-content,
+            .what-content,
+            .education-content {
+                grid-template-columns: 1fr;
+            }
+
+            .adopt-sidebar {
+                position: static;
+                border-radius: 0;
+            }
+
+            .seals-grid {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .info-cards {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav {
+                display: none;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            h2 {
+                font-size: 32px !important;
+            }
+        }
+    </style>
 </head>
 <body>
-<h1>Main page</h1>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <div class="logo">
+                <div style="font-size: 40px;">🦭</div>
+                <div class="logo-text">
+                    SEAL<br>HELPER<br>
+                    <small style="font-size: 10px;">Protecting Seals</small>
+                </div>
+            </div>
+            
+            <nav class="nav">
+                <a href="#about">ABOUT US</a>
+                <a href="#education">EDUCATION</a>
+                <a href="#shop">SHOP</a>
+                <a href="#donate">DONATE</a>
+                <a href="#signin">SIGN IN</a>
+            </nav>
+
+            <div class="header-icons">
+                <button>👤</button>
+                <button>🔍</button>
+                <button>🛒</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Adopt Sidebar -->
+    <div class="adopt-sidebar">
+        <h3>ADOPT<br>A SEAL</h3>
+        <div class="adopt-icon">
+            <div style="width: 60px; height: 60px; background: white; border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                <div style="width: 40px; height: 40px; border-radius: 50%; background: conic-gradient(#7B7BA8 0deg 270deg, transparent 270deg); position: relative;">
+                    <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 25px; height: 25px; background: white; border-radius: 50%;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="phone-decor">📞</div>
+        <div class="report-badge">
+            <div class="report-text">REPORT A<br>SEAL !!!</div>
+        </div>
+        
+        <div class="hero-content">
+            <!-- Birthday Card -->
+            <div class="birthday-card">
+                <div class="seal-photo">🦭</div>
+                <div class="birthday-text">
+                    <h3>It's Yuki's 17th birthday!!</h3>
+                    <p>
+                        <a href="#" class="birthday-link">Send her some<br>birthday wishes on<br>her special day!</a>
+                    </p>
+                </div>
+            </div>
+
+            <!-- Letter Card -->
+            <div class="letter-card">
+                <div class="polaroid">
+                    <div style="width: 180px; height: 150px; background: #D4E9F0; display: flex; align-items: center; justify-content: center; font-size: 40px;">☕🦭</div>
+                </div>
+                <p class="letter-text">
+                    Have you heard about the<br>
+                    collaboration with Bacara yet?<br>
+                    Hurry up and try our the sweetest<br>
+                    menu!!!
+                </p>
+                <div class="polaroid" style="transform: rotate(-3deg); margin-top: 20px;">
+                    <div style="width: 180px; height: 150px; background: #F5EFE0; display: flex; align-items: center; justify-content: center; font-size: 40px;">🎂🦭</div>
+                </div>
+            </div>
+
+            <div></div>
+        </div>
+    </section>
+
+    <!-- Mission Text -->
+    <div class="mission-text">
+        Seals are vital indicators of the marine environment's health<br>
+        and we feel extremely fortunate to share our shores with<br>
+        these enigmatic, intelligent and inquisitive creatures. We<br>
+        are passionate in playing our part in reducing the growing<br>
+        threats from pollution and human disturbance and<br>
+        safeguarding these incredible marine mammals for future<br>
+        generations.
+    </div>
+
+    <!-- Seal Border -->
+    <div class="seal-border"></div>
+
+    <!-- Meet the Seals -->
+    <section class="meet-seals">
+        <h2>MEET THE SEALS!</h2>
+        <div class="seals-grid">
+            <div class="seal-card">
+                <div class="seal-frame">
+                    <div style="font-size: 100px;">🦭</div>
+                </div>
+                <div class="seal-name">PONSUKE</div>
+            </div>
+
+            <div class="seal-card center">
+                <div class="heart-decoration"></div>
+                <div class="seal-frame">
+                    <div style="font-size: 180px;">🦭</div>
+                </div>
+                <div class="seal-name">KYORO</div>
+            </div>
+
+            <div class="seal-card">
+                <div class="seal-frame">
+                    <div style="font-size: 100px;">🦭</div>
+                </div>
+                <div class="seal-name">HIYORI</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- What We Do -->
+    <section class="what-we-do">
+        <div class="what-content">
+            <div class="video-container">
+                <div class="video-placeholder">
+                    ▶️
+                    <div style="position: absolute; bottom: 20px; right: 20px; background: rgba(0,0,0,0.7); color: white; padding: 5px 10px; border-radius: 5px; font-size: 14px;">1:30</div>
+                </div>
+            </div>
+
+            <div class="what-text">
+                <div class="cloud-shape">
+                    <h2>What We Do</h2>
+                    <p>
+                        Seal Helper is working toward a world where seals and marine life can flourish in healthy oceans across the globe. Through research, rescue, and community action, supporting conservation efforts worldwide, we're helping to build a global understanding of seal populations. Each seal has its own story, and with every piece of data, we move closer to ensuring a safe, thriving future for them and for our oceans.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- What To Do If You See A Seal -->
+    <section class="what-to-do">
+        <h2>WHAT TO DO IF YOU SEE A SEAL?</h2>
+        <div class="seal-illustration">
+            <div style="font-size: 120px;">🦭🦭</div>
+            <div style="font-size: 80px; color: #FF6B4A; position: absolute; top: -20px; right: -20px;">〰️</div>
+        </div>
+        
+        <div class="info-cards">
+            <div class="info-card">
+                <div class="info-icon">❤️</div>
+                <h3>RESPECT</h3>
+                <p>Do not disturb seals. Observe them from a safe distance, 100m is advised. This is a safe distance to ensure seals do not become stressed.</p>
+            </div>
+
+            <div class="info-card">
+                <div class="info-icon">✖️</div>
+                <h3>CAUTION</h3>
+                <p>Never touch or try to feed seals, they are wild animals and can bite if stressed, mothers can abandon pups if continually approached by people.</p>
+            </div>
+
+            <div class="info-card">
+                <h3>LEAVE SEALS BE</h3>
+                <p>Do not put the seal in the water or try to herd a seal into the water. Seals are on land for a reason! Seals need to rest on land to digest, care for young and socialise. New born pups and injured and sick pups are on land to rest, recover & grow.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Wave decoration -->
+    <div class="wave-bottom"></div>
+
+    <!-- Impact Numbers -->
+    <section class="impact">
+        <h2>2025 Impact Numbers</h2>
+        <div class="stats-grid">
+            <div class="stat-item">
+                <div class="stat-number">228</div>
+                <div class="stat-label">Seals Rescued</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">103</div>
+                <div class="stat-label">Seals Released</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">40,000+</div>
+                <div class="stat-label">People Reached Through our Education Programme</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">436</div>
+                <div class="stat-label">New Rescue Volunteers</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">44</div>
+                <div class="stat-label">Beach Cleans</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">79</div>
+                <div class="stat-label">Internship Programme Participants</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Wave decoration -->
+    <div class="wave-bottom"></div>
+
+    <!-- Education Section -->
+    <section class="education">
+        <div class="education-content">
+            <div class="polaroid-stack">
+                <div class="polaroid-item">
+                    <div style="width: 300px; height: 250px; background: linear-gradient(135deg, #5B9EB5, #A8D5E2); display: flex; align-items: center; justify-content: center; font-size: 80px;">
+                        🦭
+                    </div>
+                </div>
+                <div class="polaroid-item">
+                    <div style="width: 300px; height: 250px; background: linear-gradient(135deg, #90C695, #D4E9F0); display: flex; align-items: center; justify-content: center; font-size: 80px;">
+                        🦭
+                    </div>
+                </div>
+            </div>
+
+            <div class="education-text">
+                <h2>Education,<br>Awareness & Talks</h2>
+                <p>
+                    Raising awareness is a key part of our mission. We can deliver interactive workshops, school visits, and public talks to educate people of all ages about the importance of seals.
+                </p>
+                <p>
+                    Through sharing our knowledge and stories, we inspire communities to adopt behaviours that protect seals and their environments. If you would like to book a talk please get in touch.
+                </p>
+                <p>
+                    We ask for a minimum donation to the charity in return for our time depending on the travelling distance.
+                </p>
+                <p>
+                    Please get in touch for availability for talks or presentations.
+                </p>
+                <p><a href="#" class="read-more">Read more -></a></p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Join Team -->
+    <section class="join-team">
+        <div class="decorative-stars">
+            <span class="star" style="color: #FFD700;">⭐</span>
+            <span class="star" style="color: #A8D5E2;">⭐</span>
+            <span class="star" style="color: #FFB6C1;">⭐</span>
+        </div>
+        
+        <div class="join-content">
+            <h2>Do you want to join our team?</h2>
+            <p>Fill out this application now!</p>
+        </div>
+
+        <div class="arrow-decoration">↘️</div>
+        <div class="star-burst">📄</div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="social-icons">
+            <div class="social-icon">📱</div>
+            <div class="social-icon">▶️</div>
+            <div class="social-icon">✖️</div>
+            <div class="social-icon">📘</div>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+
+        // Add scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.seal-card, .info-card, .stat-item').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(el);
+        });
+
+        // Interactive seal cards
+        document.querySelectorAll('.seal-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'scale(1.05)';
+                this.style.transition = 'transform 0.3s ease';
+            });
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'scale(1)';
+            });
+        });
+
+        // Console message
+        console.log('%c🦭 SEAL HELPER', 'font-size: 24px; color: #2B5F6F; font-weight: bold;');
+        console.log('%cProtecting seals together!', 'font-size: 14px; color: #5B9EB5;');
+    </script>
 </body>
 </html>
